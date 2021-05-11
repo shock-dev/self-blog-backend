@@ -16,10 +16,11 @@
     ],
     "rules": {
         "quotes": ["error", "single"],
-        "linebreak-style": "off",
         "comma-dangle": ["error", "never"],
         "indent": ["error", 2, { "SwitchCase": 1 }],
         "object-curly-spacing": ["error", "always"],
+        "max-len": ["error", { "code": 120 }],
+        "linebreak-style": "off",
         "require-jsdoc": "off",
         "new-cap": "off"
     }

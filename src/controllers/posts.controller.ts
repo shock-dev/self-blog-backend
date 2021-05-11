@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { validationResult } from 'express-validator';
 import Post, { IPost } from '../models/Post';
 import { ResBody } from './types';
 
@@ -37,8 +38,18 @@ class PostsController {
 
   async create(req: Request<{}, {}, IPost>, res: Response<ResBody>) {
     try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          status: 'error',
+          data: errors.array()
+        });
+      }
+
       const data = req.body;
       const post = await Post.create(data);
+
       res.json({
         status: 'ok',
         data: post
@@ -53,6 +64,15 @@ class PostsController {
 
   async update(req: Request<any, {}, IPost>, res: Response<ResBody>) {
     try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          status: 'error',
+          data: errors.array()
+        });
+      }
+
       const { id } = req.params;
       const data = req.body;
       const post = await Post.findByIdAndUpdate(id, data, { 'new': true });

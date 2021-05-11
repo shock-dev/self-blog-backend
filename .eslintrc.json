@@ -18,6 +18,9 @@
         "quotes": ["error", "single"],
         "linebreak-style": "off",
         "comma-dangle": ["error", "never"],
-        "indent": ["error", 2, { "SwitchCase": 1 }]
+        "indent": ["error", 2, { "SwitchCase": 1 }],
+        "object-curly-spacing": ["error", "always"],
+        "require-jsdoc": "off",
+        "new-cap": "off"
     }
 }

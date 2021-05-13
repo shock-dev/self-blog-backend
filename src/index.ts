@@ -3,8 +3,10 @@ import express from 'express';
 import cors from 'cors';
 import consola from 'consola';
 import connect from './core/db';
+
 import postsRoutes from './routes/posts';
 import authRoutes from './routes/auth';
+import usersRoutes from './routes/users';
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ app.use(cors());
 
 app.use('/api/posts', postsRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/users', usersRoutes);
 
 connect()
   .then(() => {

@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import Post, { IPost } from '../models/Post';
-import { ResBody } from './types';
+import Post from '../models/Post';
+import { IPost } from '../types/post';
+import { ResBody } from '../types/response';
 
 class PostsController {
   async all(req: Request, res: Response<ResBody>) {

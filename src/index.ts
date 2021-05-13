@@ -4,6 +4,7 @@ import cors from 'cors';
 import consola from 'consola';
 import connect from './core/db';
 import postsRoutes from './routes/posts';
+import authRoutes from './routes/auth';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/posts', postsRoutes);
+app.use('/api/auth', authRoutes);
 
 connect()
   .then(() => {

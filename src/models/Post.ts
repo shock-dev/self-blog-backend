@@ -1,13 +1,9 @@
-import { Document, model, Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
+import { IPost } from '../types/post';
 
-export interface IPost extends Document {
-  title: string
-  description: string
-}
-
-const userSchema = new Schema({
+const postSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true }
 });
 
-export default model<IPost>('Post', userSchema);
+export default model<IPost>('Post', postSchema);

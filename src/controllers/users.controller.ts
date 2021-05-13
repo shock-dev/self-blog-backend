@@ -1,9 +1,17 @@
+import { Request, Response } from 'express';
+import { ResBody } from '../types/response';
+
 class UsersController {
-  async register() {
+  async register(req: Request, res: Response<ResBody>) {
     try {
-      console.log();
+      res.json({
+        status: 'ok'
+      });
     } catch (e) {
-      throw e;
+      res.status(500).json({
+        status: 'error',
+        data: e
+      });
     }
   }
 }

@@ -1,9 +1,5 @@
-import { Document, model, Schema } from 'mongoose';
-
-export interface IPost extends Document {
-  title: string
-  description: string
-}
+import { model, Schema } from 'mongoose';
+import { IPost } from '../types/post';
 
 const postSchema = new Schema({
   title: { type: String, required: true },

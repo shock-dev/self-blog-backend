@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ResBody } from '../types/response';
 
-class UsersController {
+class AuthController {
   async register(req: Request, res: Response<ResBody>) {
     try {
       res.json({
@@ -16,4 +16,4 @@ class UsersController {
   }
 }
 
-export default new UsersController();
+export default new AuthController();

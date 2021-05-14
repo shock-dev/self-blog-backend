@@ -33,6 +33,14 @@ class UsersController {
       });
     }
   }
+
+  getMe(req: Request, res: Response<ResBody>) {
+    const { user } = req;
+    res.json({
+      status: 'ok',
+      data: user
+    });
+  }
 }
 
 export default new UsersController();

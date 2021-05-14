@@ -17,6 +17,22 @@ class UsersController {
       });
     }
   }
+
+  async one(req: Request<any>, res: Response<ResBody>) {
+    try {
+      const { id } = req.params;
+      const user = await User.findById(id);
+      res.json({
+        status: 'ok',
+        data: user
+      });
+    } catch (e) {
+      res.status(500).json({
+        status: 'error',
+        data: e
+      });
+    }
+  }
 }
 
 export default new UsersController();

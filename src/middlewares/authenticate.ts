@@ -5,8 +5,8 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
   return passport.authenticate('jwt', {
     session: false
   }, (err, user, info) => {
-    if (!user || !err) {
-      return res.json({
+    if (!user || err) {
+      return res.status(400).json({
         status: 'error',
         error: info.message
       });

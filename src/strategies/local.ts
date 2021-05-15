@@ -1,9 +1,9 @@
-import LocalStrategy from 'passport-local';
+import { Strategy } from 'passport-local';
 import { IUser } from '../types/user';
 import User from '../models/User';
 import bcrypt from 'bcryptjs';
 
-const local = new LocalStrategy.Strategy(
+const local = new Strategy(
   {
     usernameField: 'email',
     passwordField: 'password'
@@ -22,7 +22,7 @@ const local = new LocalStrategy.Strategy(
 
       return done(null, user);
     } catch (e) {
-      return done(e);
+      return done(e, { message: e });
     }
   }
 );

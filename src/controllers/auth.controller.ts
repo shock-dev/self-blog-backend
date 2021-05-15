@@ -4,8 +4,6 @@ import { ResBody } from '../types/response';
 import { IUser } from '../types/user';
 import User from '../models/User';
 import { validationResult } from 'express-validator';
-import passport from '../core/passport';
-import generateJWT from '../utils/generateJWT';
 
 class AuthController {
   async register(req: Request<{}, {}, IUser>, res: Response<ResBody>) {
@@ -48,31 +46,6 @@ class AuthController {
         data: e
       });
     }
-  }
-
-  login(req: Request, res: Response<ResBody>) {
-    passport.authenticate('local', (err, user, info) => {
-      if (err) {
-        return res.status(400).json({
-          status: 'error',
-          data: err
-        });
-      }
-
-      if (!user) {
-        return res.status(401).json({
-          status: 'error',
-          message: info.message
-        });
-      }
-
-      const token = generateJWT(user);
-
-      res.json({
-        status: 'ok',
-        data: token
-      });
-    })(req, res);
   }
 }
 

@@ -10,8 +10,6 @@ const jwtStrategy = new Strategy({
   try {
     const user = await User.findById(_id);
 
-    console.log(user);
-
     if (!user) {
       return done(null, false);
     }

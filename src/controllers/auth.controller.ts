@@ -62,6 +62,22 @@ class AuthController {
       });
     }
   }
+
+  logout(req: Request, res: Response<ResBody>) {
+    if (!req.cookies['authToken']) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'You\'re already out'
+      });
+    }
+
+    res.clearCookie('authToken');
+
+    return res.json({
+      status: 'ok',
+      message: 'You have successfully logged out'
+    });
+  }
 }
 
 export default new AuthController();

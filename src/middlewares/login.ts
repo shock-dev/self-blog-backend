@@ -20,9 +20,21 @@ const login = (req: Request, res: Response, next: NextFunction) => {
 
     const token = generateJWT(user);
 
+    res.cookie(
+      'authToken',
+      token,
+      { maxAge: 30 * 24 * 60 * 60 * 1000 }
+    );
+
+    const data = {
+      id: user._id,
+      username: user.username,
+      email: user.email
+    };
+
     res.json({
       status: 'ok',
-      data: token
+      data
     });
 
     next();

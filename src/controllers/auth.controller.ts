@@ -4,6 +4,7 @@ import { ResBody } from '../types/response';
 import { IUser } from '../types/user';
 import User from '../models/User';
 import { validationResult } from 'express-validator';
+import generateJWT from '../utils/generateJWT';
 
 class AuthController {
   async register(req: Request<{}, {}, IUser>, res: Response<ResBody>) {
@@ -30,15 +31,29 @@ class AuthController {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
 
-      const user = await User.create({
+      const user: IUser = await User.create({
         email,
         username,
         password: hash
       });
 
+      const token = generateJWT(user);
+
+      res.cookie(
+        'authToken',
+        token,
+        { maxAge: 30 * 24 * 60 * 60 * 1000 }
+      );
+
+      const data = {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      };
+
       res.json({
         status: 'ok',
-        data: user
+        data
       });
     } catch (e) {
       res.status(500).json({
@@ -46,6 +61,22 @@ class AuthController {
         data: e
       });
     }
+  }
+
+  logout(req: Request, res: Response<ResBody>) {
+    if (!req.cookies['authToken']) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'You\'re already out'
+      });
+    }
+
+    res.clearCookie('authToken');
+
+    return res.json({
+      status: 'ok',
+      message: 'You have successfully logged out'
+    });
   }
 }
 

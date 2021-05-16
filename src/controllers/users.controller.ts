@@ -35,10 +35,17 @@ class UsersController {
   }
 
   getMe(req: Request, res: Response<ResBody>) {
-    const { user } = req;
+    const user: any = req.user;
+
+    const data = {
+      id: user._id,
+      username: user.username,
+      email: user.email
+    };
+
     res.json({
       status: 'ok',
-      data: user
+      data
     });
   }
 }

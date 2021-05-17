@@ -71,7 +71,7 @@ class AuthController {
       if (!user) {
         return res.status(400).json({
           status: 'error',
-          data: 'invalid username or password'
+          data: 'invalid email or password'
         });
       }
 
@@ -80,7 +80,7 @@ class AuthController {
       if (!isValidPassword) {
         return res.status(400).json({
           status: 'error',
-          data: 'invalid username or password'
+          data: 'invalid email or password'
         });
       }
 

@@ -1,11 +1,9 @@
 import passport from 'passport';
 import User from '../models/User';
 import { IUser } from '../types/user';
-import local from '../strategies/local';
 import jwtStrategy from '../strategies/jwt';
 
-passport.use(local);
-passport.use(jwtStrategy);
+passport.use('jwt', jwtStrategy);
 
 type User = {
   _id?: number

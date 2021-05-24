@@ -6,11 +6,11 @@ import consola from 'consola';
 import cookieParser from 'cookie-parser';
 import connect from './core/db';
 
+dotenv.config();
+
 import postsRoutes from './routes/posts';
 import authRoutes from './routes/auth';
 import usersRoutes from './routes/users';
-
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;

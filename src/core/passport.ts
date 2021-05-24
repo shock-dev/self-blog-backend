@@ -5,11 +5,7 @@ import jwtStrategy from '../strategies/jwt';
 
 passport.use('jwt', jwtStrategy);
 
-type User = {
-  _id?: number
-}
-
-passport.serializeUser((user: User, done) => {
+passport.serializeUser((user: any, done) => {
   done(null, user._id);
 });
 

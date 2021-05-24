@@ -23,7 +23,10 @@ class PostsController {
   async one(req: Request<any>, res: Response<ResBody>) {
     try {
       const { id } = req.params;
-      const post = await Post.findById(id);
+      const post: IPost = await Post.findById(id);
+
+      post.views++;
+      await post.save();
 
       res.json({
         status: 'ok',

@@ -23,9 +23,9 @@ app.use(cors({
 }));
 app.use(passport.initialize());
 
-app.use('/api/posts', postsRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/users', usersRoutes);
+app.use('/posts', postsRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', usersRoutes);
 
 connect()
   .then(() => {

@@ -3,11 +3,12 @@ import { validationResult } from 'express-validator';
 import Post from '../models/Post';
 import { IPost } from '../types/post';
 import { ResBody } from '../types/response';
+import cloudinary from '../core/cloudinary';
 
 class PostsController {
   async all(req: Request, res: Response<ResBody>) {
     try {
-      const posts = await Post.find();
+      const posts = await Post.find().populate('user');
       res.json({
         status: 'ok',
         data: posts
@@ -23,7 +24,7 @@ class PostsController {
   async one(req: Request<any>, res: Response<ResBody>) {
     try {
       const { id } = req.params;
-      const post: IPost = await Post.findById(id);
+      const post: IPost = await Post.findById(id).populate('user');
 
       post.views++;
       await post.save();
@@ -51,8 +52,22 @@ class PostsController {
         });
       }
 
-      const data = req.body;
-      const post = await Post.create(data);
+      const user: any = req.user;
+      const data = {
+        ...req.body,
+        user: user._id
+      };
+
+      if (req.file) {
+        const result = await cloudinary.uploader.upload(req.file.path, {
+          folder: 'posts'
+        });
+
+        data.imageUrl = result.secure_url;
+        data.cloudinaryId = result.public_id;
+      }
+
+      const post: IPost = await Post.create(data);
 
       res.json({
         status: 'ok',

@@ -125,6 +125,21 @@ class AuthController {
       message: 'You have successfully logged out'
     });
   }
+
+  getMe(req: Request, res: Response<ResBody>) {
+    const user: any = req.user;
+
+    const data = {
+      id: user._id,
+      username: user.username,
+      email: user.email
+    };
+
+    res.json({
+      status: 'ok',
+      data
+    });
+  }
 }
 
 export default new AuthController();

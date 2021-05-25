@@ -4,6 +4,7 @@ import Post from '../models/Post';
 import { IPost } from '../types/post';
 import { ResBody } from '../types/response';
 import cloudinary from '../core/cloudinary';
+import { Express } from '../global';
 
 class PostsController {
   async all(req: Request, res: Response<ResBody>) {
@@ -52,7 +53,7 @@ class PostsController {
         });
       }
 
-      const user = req.user;
+      const user: Express.User = req.user;
       const data = {
         ...req.body,
         user: user._id

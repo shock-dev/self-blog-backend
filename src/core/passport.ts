@@ -1,10 +1,11 @@
 import passport from 'passport';
 import User from '../models/User';
 import jwtStrategy from '../strategies/jwt';
+import { Express } from '../global';
 
 passport.use('jwt', jwtStrategy);
 
-passport.serializeUser((user, done) => {
+passport.serializeUser((user: Express.User, done) => {
   done(null, user._id);
 });
 

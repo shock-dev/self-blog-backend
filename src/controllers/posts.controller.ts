@@ -52,7 +52,7 @@ class PostsController {
         });
       }
 
-      const user: any = req.user;
+      const user = req.user;
       const data = {
         ...req.body,
         user: user._id

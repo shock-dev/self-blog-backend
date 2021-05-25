@@ -25,7 +25,12 @@ class PostsController {
   async one(req: Request<any>, res: Response<ResBody>) {
     try {
       const { id } = req.params;
-      const post: IPost = await Post.findById(id).populate('user');
+      const post: IPost = await Post.findById(id)
+        .populate('user')
+        .populate({
+          path: 'comments',
+          populate: { path: 'user' }
+        });
 
       post.views++;
       await post.save();

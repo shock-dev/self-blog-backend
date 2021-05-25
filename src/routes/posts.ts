@@ -1,21 +1,30 @@
 import { Router } from 'express';
-import controller from '../controllers/posts.controller';
-import validate from '../validation/post.validate';
+import PostController from '../controllers/posts.controller';
+import CommentsController from '../controllers/comments.controller';
+import validatePost from '../validation/post.validate';
 import upload from '../core/upload';
 import checkJWT from '../middlewares/checkJWT';
 
 const router = Router();
 
-router.get('/', controller.all);
-router.get('/:id', controller.one);
+// Post CRUD
+router.get('/', PostController.all);
+router.get('/:id', PostController.one);
 router.post(
   '/',
   upload.single('intro'),
   checkJWT(),
-  ...validate,
-  controller.create
+  ...validatePost,
+  PostController.create
 );
-router.put('/:id', ...validate, controller.update);
-router.delete('/:id', controller.destroy);
+router.put('/:id', ...validatePost, PostController.update);
+router.delete('/:id', PostController.destroy);
+
+// Comments
+router.post(
+  '/:id/comment',
+  checkJWT(),
+  CommentsController.create
+);
 
 export default router;

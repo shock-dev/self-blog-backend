@@ -21,6 +21,10 @@ const postSchema = new Schema({
   cloudinaryId: {
     type: String
   },
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comment'
+  }],
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',

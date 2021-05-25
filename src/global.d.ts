@@ -3,5 +3,7 @@ export declare module Express {
     _id?: string;
     email?: string;
     username?: string;
+    avatarUrl?: string
+    cloudinaryId?: string
   }
 }

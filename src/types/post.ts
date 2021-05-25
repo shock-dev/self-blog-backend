@@ -7,4 +7,5 @@ export interface IPost extends Document {
   imageUrl?: String
   views?: number
   cloudinaryId?: string
+  comments: string[]
 }

@@ -16,15 +16,17 @@ class CommentsController {
       const user: Express.User = req.user;
       const postId = req.params.id;
 
-      const comment: ICommentDocument = await Comment.create({
+      let comment: ICommentDocument = await Comment.create({
         text: req.body.text,
         post: postId,
         user: user._id
       });
 
+      comment = await comment.populate('user').execPopulate();
+
       const post: IPost = await Post.findById(postId);
 
-      post.comments.unshift(comment.id);
+      post.comments.push(comment.id);
 
       await post.save();
 

@@ -1,7 +1,7 @@
 import { body } from 'express-validator';
 
 const title = { min: 3, max: 70 };
-const description = { min: 10, max: 500 };
+const description = { min: 10, max: 5000 };
 
 export default [
   body('title', 'Enter the title')

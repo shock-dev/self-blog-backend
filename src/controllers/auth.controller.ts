@@ -95,7 +95,8 @@ class AuthController {
       const data = {
         id: user._id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        avatarUrl: user.avatarUrl
       };
 
       res.json({
@@ -132,7 +133,8 @@ class AuthController {
     const data = {
       id: user._id,
       username: user.username,
-      email: user.email
+      email: user.email,
+      avatarUrl: user.avatarUrl
     };
 
     res.json({

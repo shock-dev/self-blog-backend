@@ -45,15 +45,9 @@ class AuthController {
         { maxAge: 30 * 24 * 60 * 60 * 1000 }
       );
 
-      const data = {
-        id: user._id,
-        username: user.username,
-        email: user.email
-      };
-
       res.json({
         status: 'ok',
-        data
+        data: user
       });
     } catch (e) {
       res.status(500).json({
@@ -92,16 +86,9 @@ class AuthController {
         { maxAge: 30 * 24 * 60 * 60 * 1000 }
       );
 
-      const data = {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        avatarUrl: user.avatarUrl
-      };
-
       res.json({
         status: 'ok',
-        data
+        data: user
       });
     } catch (e) {
       res.status(500).json({
@@ -130,16 +117,9 @@ class AuthController {
   getMe(req: Request, res: Response<ResBody>) {
     const user: any = req.user;
 
-    const data = {
-      id: user._id,
-      username: user.username,
-      email: user.email,
-      avatarUrl: user.avatarUrl
-    };
-
     res.json({
       status: 'ok',
-      data
+      data: user
     });
   }
 }

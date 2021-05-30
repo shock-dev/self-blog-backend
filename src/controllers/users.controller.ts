@@ -52,7 +52,8 @@ class UsersController {
       }
 
       const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: 'avatars'
+        folder: 'avatars',
+        transformation: { width: 500, format: 'jpg' }
       });
 
       user.avatarUrl = result.secure_url;

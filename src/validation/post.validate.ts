@@ -4,13 +4,13 @@ const title = { min: 3, max: 70 };
 const description = { min: 10, max: 5000 };
 
 export default [
-  body('title', 'Enter the title')
+  body('title', 'Введите название')
     .isString()
-    .withMessage('Title must be a string')
+    .withMessage('Название должно быть строкой')
     .isLength(title)
-    .withMessage(`Allowed number of characters in title from ${title. min} to ${title. max}`),
-  body('description', 'Enter the description')
+    .withMessage(`Допустимое кол-во символов названия от ${title. min} до ${title. max} символов`),
+  body('description', 'Введите описание')
     .isString()
     .isLength(description)
-    .withMessage(`Allowed number of characters in description from ${description. min} to ${description. max}`)
+    .withMessage(`Допустимое кол-во символов описания от ${description. min} до ${description. max} символов`)
 ];

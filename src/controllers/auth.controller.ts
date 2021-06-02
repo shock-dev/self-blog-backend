@@ -19,12 +19,19 @@ class AuthController {
       }
 
       const { email, username, password } = req.body;
-      const candidate = await User.findOne({ email });
+      const suitableUsers = await User.findOne({ $or: [{ email }, { username }] });
 
-      if (candidate) {
+      if (suitableUsers?.email === email) {
         return res.status(500).json({
           status: 'error',
-          message: 'User with this email already exists'
+          message: 'Пользователь с таким email уже существует'
+        });
+      }
+
+      if (suitableUsers?.username === username) {
+        return res.status(500).json({
+          status: 'error',
+          message: 'Придумайте другой username'
         });
       }
 
@@ -50,9 +57,10 @@ class AuthController {
         data: user
       });
     } catch (e) {
+      console.log(e);
       res.status(500).json({
         status: 'error',
-        data: e.message
+        message: e.message
       });
     }
   }
@@ -65,7 +73,7 @@ class AuthController {
       if (!user) {
         return res.status(400).json({
           status: 'error',
-          data: 'invalid email or password'
+          data: 'Неверный email или пароль'
         });
       }
 
@@ -74,7 +82,7 @@ class AuthController {
       if (!isValidPassword) {
         return res.status(400).json({
           status: 'error',
-          data: 'invalid email or password'
+          data: 'Неверный email или пароль'
         });
       }
 

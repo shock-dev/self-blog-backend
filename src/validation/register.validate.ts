@@ -5,26 +5,26 @@ const username = { min: 2, max: 50 };
 const password = { min: 6, max: 50 };
 
 export default [
-  body('email', 'Enter the email')
+  body('email', 'Введите email')
     .isString()
-    .withMessage('Email must be a string')
+    .withMessage('Email должен быть строкой')
     .isEmail()
-    .withMessage('Enter email correctly')
+    .withMessage('Некоректно введет email')
     .isLength(email)
-    .withMessage(`Allowed number of characters in email from ${email. min} to ${email. max}`),
-  body('username', 'Enter the username')
+    .withMessage(`Допустимое кол-во символов email от ${email. min} до ${email. max} символов`),
+  body('username', 'Введите username')
     .isString()
-    .withMessage('Username must be a string')
+    .withMessage('Username должен быть строкой')
     .isLength(username)
-    .withMessage(`Allowed number of characters in username from ${username. min} to ${username. max}`),
+    .withMessage(`Допустимое кол-во символов username от ${username. min} до ${username. max} символов`),
   body('password', 'Введите пароль')
     .isString()
     .isLength(password)
-    .withMessage(`Allowed number of characters in username from ${password. min}`),
+    .withMessage(`Допустимое кол-во символов пароля от ${password. min}`),
   body('passwordConfirm')
     .custom((value, { req }) => {
       if (value !== req.body.password) {
-        throw new Error('Password confirmation does not match password');
+        throw new Error('Не удалось поддтвердить пароль');
       }
 
       return true;

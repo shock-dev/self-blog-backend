@@ -7,6 +7,10 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  fullname: {
+    type: String,
+    required: true
+  },
   username: {
     type: String,
     unique: true,
@@ -17,6 +21,10 @@ const userSchema = new Schema({
   },
   cloudinaryId: {
     type: String
+  },
+  birthday: {
+    type: Date,
+    required: true
   },
   password: {
     type: String,

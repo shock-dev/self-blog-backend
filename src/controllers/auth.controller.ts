@@ -18,7 +18,13 @@ class AuthController {
         });
       }
 
-      const { email, username, password } = req.body;
+      const {
+        email,
+        username,
+        fullname,
+        birthday,
+        password
+      } = req.body;
       const suitableUsers = await User.findOne({ $or: [{ email }, { username }] });
 
       if (suitableUsers?.email === email) {
@@ -40,7 +46,9 @@ class AuthController {
 
       const user: IUser = await User.create({
         email,
+        fullname,
         username,
+        birthday,
         password: hash
       });
 
@@ -57,7 +65,6 @@ class AuthController {
         data: user
       });
     } catch (e) {
-      console.log(e);
       res.status(500).json({
         status: 'error',
         message: e.message

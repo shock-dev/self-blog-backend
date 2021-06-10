@@ -25,16 +25,16 @@ class AuthController {
         birthday,
         password
       } = req.body;
-      const suitableUsers = await User.findOne({ $or: [{ email }, { username }] });
+      const suitableUser = await User.findOne({ $or: [{ email }, { username }] });
 
-      if (suitableUsers?.email === email) {
+      if (suitableUser?.email === email) {
         return res.status(500).json({
           status: 'error',
           message: 'Пользователь с таким email уже существует'
         });
       }
 
-      if (suitableUsers?.username === username) {
+      if (suitableUser?.username === username) {
         return res.status(500).json({
           status: 'error',
           message: 'Придумайте другой username'
@@ -57,7 +57,7 @@ class AuthController {
       res.cookie(
         'authToken',
         token,
-        { maxAge: 30 * 24 * 60 * 60 * 1000 }
+        { maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'none' }
       );
 
       res.json({
@@ -98,7 +98,7 @@ class AuthController {
       res.cookie(
         'authToken',
         token,
-        { maxAge: 30 * 24 * 60 * 60 * 1000 }
+        { maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'none' }
       );
 
       res.json({

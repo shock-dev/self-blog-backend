@@ -3,6 +3,7 @@ import { ResBody } from '../types/response';
 import User from '../models/User';
 import { Express } from '../global';
 import cloudinary from '../core/cloudinary';
+import { validationResult } from 'express-validator';
 
 class UsersController {
   async all(req: Request, res: Response<ResBody>) {
@@ -60,6 +61,56 @@ class UsersController {
       user.cloudinaryId = result.public_id;
 
       await user.save();
+
+      res.json({
+        status: 'ok',
+        data: user
+      });
+    } catch (e) {
+      res.status(500).json({
+        status: 'error',
+        data: e
+      });
+    }
+  }
+
+  async update(req: Request, res: Response<ResBody>) {
+    try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          status: 'error',
+          data: errors.array()
+        });
+      }
+
+      const {
+        email,
+        username,
+        fullname
+      } = req.body;
+
+      // Проверяем не занят ли email и username
+      const suitableUser = await User.findOne({ $or: [{ email }, { username }] });
+
+      if (suitableUser?.email === email) {
+        return res.status(500).json({
+          status: 'error',
+          message: 'Пользователь с таким email уже существует'
+        });
+      }
+
+      if (suitableUser?.username === username) {
+        return res.status(500).json({
+          status: 'error',
+          message: 'Придумайте другой username'
+        });
+      }
+
+      const user = await User.findByIdAndUpdate((req.user as Express.User)._id, {
+        $set: { email, username, fullname }
+      }, { new: true });
 
       res.json({
         status: 'ok',

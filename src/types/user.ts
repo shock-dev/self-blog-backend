@@ -9,4 +9,5 @@ export interface IUser extends Document {
   password: string
   avatarUrl?: string
   cloudinaryId?: string
+  posts: string[]
 }

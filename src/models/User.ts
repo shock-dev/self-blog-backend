@@ -30,7 +30,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
     select: false
-  }
+  },
+  posts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
 }, {
   timestamps: true
 });

@@ -18,7 +18,7 @@ export default [
     .isString()
     .withMessage('Полное имя должно быть строкой')
     .isLength(fullname)
-    .withMessage(`Допустимое кол-во символов полного имени от ${username. min} до ${username. max} символов`),
+    .withMessage(`Допустимое кол-во символов полного имени от ${fullname. min} до ${fullname. max} символов`),
 
   body('username', 'Введите username')
     .isString()

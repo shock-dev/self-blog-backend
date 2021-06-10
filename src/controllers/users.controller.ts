@@ -91,30 +91,37 @@ class UsersController {
         fullname
       } = req.body;
 
-      // Проверяем не занят ли email и username
-      const suitableUser = await User.findOne({ $or: [{ email }, { username }] });
+      const user = await User.findById((req.user as Express.User)._id);
 
-      if (suitableUser?.email === email) {
-        return res.status(500).json({
-          status: 'error',
-          message: 'Пользователь с таким email уже существует'
-        });
+      if (user.email !== email) {
+        const suitableUser = await User.findOne({ email });
+
+        if (suitableUser?.email === email) {
+          return res.status(500).json({
+            status: 'error',
+            message: 'Пользователь с таким email уже существует'
+          });
+        }
       }
 
-      if (suitableUser?.username === username) {
-        return res.status(500).json({
-          status: 'error',
-          message: 'Придумайте другой username'
-        });
+      if (user.username !== username) {
+        const suitableUser = await User.findOne({ username });
+
+        if (suitableUser?.username === username) {
+          return res.status(500).json({
+            status: 'error',
+            message: 'Придумайте другой username'
+          });
+        }
       }
 
-      const user = await User.findByIdAndUpdate((req.user as Express.User)._id, {
+      const updatedUser = await User.findByIdAndUpdate((req.user as Express.User)._id, {
         $set: { email, username, fullname }
       }, { new: true });
 
       res.json({
         status: 'ok',
-        data: user
+        data: updatedUser
       });
     } catch (e) {
       res.status(500).json({

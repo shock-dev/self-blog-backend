@@ -57,7 +57,7 @@ class AuthController {
       res.cookie(
         'authToken',
         token,
-        { maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'none' }
+        { maxAge: 30 * 24 * 60 * 60 * 1000 }
       );
 
       res.json({
@@ -98,7 +98,7 @@ class AuthController {
       res.cookie(
         'authToken',
         token,
-        { maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'none' }
+        { maxAge: 30 * 24 * 60 * 60 * 1000 }
       );
 
       res.json({

@@ -7,13 +7,21 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
-  fullname: {
+  name: {
+    type: String,
+    required: true
+  },
+  surname: {
     type: String,
     required: true
   },
   username: {
     type: String,
     unique: true,
+    required: true
+  },
+  gender: {
+    type: String,
     required: true
   },
   avatarUrl: {

@@ -7,7 +7,9 @@ import updateUserValidation from '../validation/updateUser.validate';
 const router = Router();
 
 router.get('/', controller.all);
+
 router.get('/:id', controller.one);
+
 router.post(
   '/avatar',
   upload.single('avatar'),
@@ -19,6 +21,12 @@ router.put(
   ...updateUserValidation,
   checkJWT(),
   controller.update
+);
+
+router.patch(
+  '/:id/follow',
+  checkJWT(),
+  controller.follow
 );
 
 export default router;

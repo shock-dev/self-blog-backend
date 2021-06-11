@@ -2,7 +2,8 @@ import { body } from 'express-validator';
 
 const email = { min: 6, max: 70 };
 const username = { min: 2, max: 50 };
-const fullname = { min: 6, max: 50 };
+const name = { min: 2, max: 25 };
+const surname = { min: 2, max: 25 };
 const password = { min: 6, max: 50 };
 
 export default [
@@ -14,11 +15,17 @@ export default [
     .isLength(email)
     .withMessage(`Допустимое кол-во символов email от ${email. min} до ${email. max} символов`),
 
-  body('fullname', 'Введите полное имя')
+  body('name', 'Введите имя')
     .isString()
-    .withMessage('Полное имя должно быть строкой')
-    .isLength(fullname)
-    .withMessage(`Допустимое кол-во символов полного имени от ${fullname. min} до ${fullname. max} символов`),
+    .withMessage('Имя должно быть строкой')
+    .isLength(name)
+    .withMessage(`Допустимое кол-во символов имени от ${name. min} до ${name. max} символов`),
+
+  body('surname', 'Введите фамилию')
+    .isString()
+    .withMessage('Фамилия должна быть строкой')
+    .isLength(surname)
+    .withMessage(`Допустимое кол-во символов полного фамилии от ${surname. min} до ${surname. max} символов`),
 
   body('username', 'Введите username')
     .isString()

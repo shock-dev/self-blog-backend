@@ -18,13 +18,8 @@ class AuthController {
         });
       }
 
-      const {
-        email,
-        username,
-        fullname,
-        birthday,
-        password
-      } = req.body;
+      const { email, username, password } = req.body;
+
       const suitableUser = await User.findOne({ $or: [{ email }, { username }] });
 
       if (suitableUser?.email === email) {
@@ -45,10 +40,7 @@ class AuthController {
       const hash = bcrypt.hashSync(password, salt);
 
       const user: IUser = await User.create({
-        email,
-        fullname,
-        username,
-        birthday,
+        ...req.body,
         password: hash
       });
 

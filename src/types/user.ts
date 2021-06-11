@@ -11,5 +11,7 @@ export interface IUser extends Document {
   password: string
   avatarUrl?: string
   cloudinaryId?: string
+  followers: string[]
+  following: string[]
   posts: string[]
 }

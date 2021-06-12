@@ -10,6 +10,10 @@ router.get('/', controller.all);
 
 router.get('/:id', controller.one);
 
+router.get('/:id/followers', controller.followersById);
+
+router.get('/:id/following', controller.followingById);
+
 router.post(
   '/avatar',
   upload.single('avatar'),

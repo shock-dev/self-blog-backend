@@ -247,6 +247,31 @@ class UsersController {
       });
     }
   }
+
+  async followersById(req: Request, res: Response<ResBody>) {
+    try {
+      const id = new Types.ObjectId(req.params.id);
+
+      if (!Types.ObjectId.isValid(id)) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Invalid id'
+        });
+      }
+
+      const user = await User.findById(id).populate('followers');
+
+      res.json({
+        status: 'ok',
+        data: user.followers
+      });
+    } catch (e) {
+      res.status(500).json({
+        status: 'error',
+        data: e
+      });
+    }
+  }
 }
 
 export default new UsersController();

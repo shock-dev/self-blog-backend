@@ -29,4 +29,10 @@ router.patch(
   controller.follow
 );
 
+router.patch(
+  '/:id/unfollow',
+  checkJWT(),
+  controller.unfollow
+);
+
 export default router;

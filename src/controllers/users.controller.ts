@@ -188,6 +188,65 @@ class UsersController {
       });
     }
   }
+
+  async unfollow(req: Request, res: Response<ResBody>) {
+    try {
+      const me = req.user as Express.User;
+      const id = new Types.ObjectId(req.params.id);
+
+      if (!Types.ObjectId.isValid(id)) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Invalid id'
+        });
+      }
+
+      if (id.equals(me._id)) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'You cannot unfollow yourself'
+        });
+      }
+
+      const query = {
+        _id: me._id,
+        following: { $elemMatch: { $eq: id } }
+      };
+
+      const update = {
+        $pull: { following: id }
+      };
+
+      const updated = await User.updateOne(query, update);
+
+      const secondQuery = {
+        _id: id.toString(),
+        followers: { $elemMatch: { $eq: me._id } }
+      };
+
+      const secondUpdate = {
+        $pull: { followers: me._id }
+      };
+
+      const secondUpdated = await User.updateOne(secondQuery, secondUpdate);
+
+      if (!updated || !secondUpdated) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Unable to unfollow that user'
+        });
+      }
+
+      res.status(200).json({
+        status: 'ok'
+      });
+    } catch (e) {
+      res.status(500).json({
+        status: 'error',
+        data: e
+      });
+    }
+  }
 }
 
 export default new UsersController();

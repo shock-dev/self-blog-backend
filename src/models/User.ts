@@ -27,6 +27,8 @@ const userSchema = new Schema({
   avatarUrl: {
     type: String
   },
+  location: { type: String },
+  bio: { type: String },
   cloudinaryId: {
     type: String
   },

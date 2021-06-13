@@ -89,7 +89,9 @@ class UsersController {
       const {
         email,
         username,
-        fullname
+        fullname,
+        bio,
+        location
       } = req.body;
 
       const user = await User.findById((req.user as Express.User)._id);
@@ -117,7 +119,7 @@ class UsersController {
       }
 
       const updatedUser = await User.findByIdAndUpdate((req.user as Express.User)._id, {
-        $set: { email, username, fullname }
+        $set: { email, username, fullname, location, bio }
       }, { new: true });
 
       res.json({

@@ -10,6 +10,8 @@ export interface IUser extends Document {
   birthday: string
   password: string
   avatarUrl?: string
+  bio?: string
+  location?: string
   cloudinaryId?: string
   followers: string[]
   following: string[]

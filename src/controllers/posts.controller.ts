@@ -5,6 +5,7 @@ import { IPost } from '../types/post';
 import { ResBody } from '../types/response';
 import cloudinary from '../core/cloudinary';
 import { Express } from '../global';
+import { Types } from 'mongoose';
 
 class PostsController {
   async all(req: Request, res: Response<ResBody>) {
@@ -12,7 +13,7 @@ class PostsController {
       const posts = await Post.find().populate('user');
       res.json({
         status: 'ok',
-        data: posts
+        data: posts.reverse()
       });
     } catch (e) {
       res.status(500).json({
@@ -120,6 +121,31 @@ class PostsController {
       res.json({
         status: 'ok',
         data: post
+      });
+    } catch (e) {
+      res.status(500).json({
+        status: 'error',
+        data: e
+      });
+    }
+  }
+
+  async postsByUserId(req: Request, res: Response<ResBody>) {
+    try {
+      const id = new Types.ObjectId(req.params.id);
+
+      if (!Types.ObjectId.isValid(id)) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Invalid id'
+        });
+      }
+
+      const posts = await Post.find({ user: id.toString() });
+
+      res.json({
+        status: 'ok',
+        data: posts.reverse()
       });
     } catch (e) {
       res.status(500).json({

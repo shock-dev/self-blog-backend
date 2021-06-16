@@ -265,7 +265,7 @@ class UsersController {
 
       res.json({
         status: 'ok',
-        data: user.followers
+        data: user.followers.reverse()
       });
     } catch (e) {
       res.status(500).json({
@@ -290,7 +290,7 @@ class UsersController {
 
       res.json({
         status: 'ok',
-        data: user.following
+        data: user.following.reverse()
       });
     } catch (e) {
       res.status(500).json({

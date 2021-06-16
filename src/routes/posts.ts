@@ -9,7 +9,11 @@ const router = Router();
 
 // Post CRUD
 router.get('/', PostController.all);
+
 router.get('/:id', PostController.one);
+
+router.get('/:id/user', PostController.postsByUserId);
+
 router.post(
   '/',
   upload.single('intro'),
@@ -17,7 +21,9 @@ router.post(
   ...validatePost,
   PostController.create
 );
+
 router.put('/:id', ...validatePost, PostController.update);
+
 router.delete('/:id', PostController.destroy);
 
 // Comments

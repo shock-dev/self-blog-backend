@@ -1,5 +1,4 @@
-import { model, Schema } from 'mongoose';
-import { IUser } from '../types/user';
+const { model, Schema } = require('mongoose');
 
 const userSchema = new Schema({
   email: {
@@ -57,4 +56,4 @@ const userSchema = new Schema({
   timestamps: true
 });
 
-export default model<IUser>('User', userSchema);
+module.exports = model('User', userSchema);

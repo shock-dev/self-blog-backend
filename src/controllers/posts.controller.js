@@ -1,14 +1,10 @@
-import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
-import Post from '../models/Post';
-import { IPost } from '../types/post';
-import { ResBody } from '../types/response';
-import cloudinary from '../core/cloudinary';
-import { Express } from '../global';
-import { Types } from 'mongoose';
+const { validationResult } = require('express-validator');
+const Post = require('../models/Post');
+const cloudinary = require('../core/cloudinary');
+const { Types } = require('mongoose');
 
 class PostsController {
-  async all(req: Request, res: Response<ResBody>) {
+  async all(req, res) {
     try {
       const posts = await Post.find().populate('user');
       res.json({
@@ -23,10 +19,10 @@ class PostsController {
     }
   }
 
-  async one(req: Request<any>, res: Response<ResBody>) {
+  async one(req, res) {
     try {
       const { id } = req.params;
-      const post: IPost = await Post.findById(id)
+      const post = await Post.findById(id)
         .populate('user')
         .populate({
           path: 'comments',
@@ -48,7 +44,7 @@ class PostsController {
     }
   }
 
-  async create(req: Request<{}, {}, IPost>, res: Response<ResBody>) {
+  async create(req, res) {
     try {
       const errors = validationResult(req);
 
@@ -59,7 +55,7 @@ class PostsController {
         });
       }
 
-      const user: Express.User = req.user;
+      const user = req.user;
       const data = {
         ...req.body,
         user: user._id
@@ -74,7 +70,7 @@ class PostsController {
         data.cloudinaryId = result.public_id;
       }
 
-      const post: IPost = await Post.create(data);
+      const post = await Post.create(data);
 
       res.json({
         status: 'ok',
@@ -88,7 +84,7 @@ class PostsController {
     }
   }
 
-  async update(req: Request<any, {}, IPost>, res: Response<ResBody>) {
+  async update(req, res) {
     try {
       const errors = validationResult(req);
 
@@ -114,7 +110,7 @@ class PostsController {
     }
   }
 
-  async destroy(req: Request, res: Response<ResBody>) {
+  async destroy(req, res) {
     try {
       const { id } = req.params;
       const post = await Post.findByIdAndDelete(id);
@@ -130,7 +126,7 @@ class PostsController {
     }
   }
 
-  async postsByUserId(req: Request, res: Response<ResBody>) {
+  async postsByUserId(req, res) {
     try {
       const id = new Types.ObjectId(req.params.id);
 
@@ -156,4 +152,4 @@ class PostsController {
   }
 }
 
-export default new PostsController();
+module.exports = new PostsController();

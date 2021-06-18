@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import controller from '../controllers/users.controller';
-import checkJWT from '../middlewares/checkJWT';
-import upload from '../core/upload';
-import updateUserValidation from '../validation/updateUser.validate';
+const { Router } = require('express');
+const controller = require('../controllers/users.controller');
+const checkJWT = require('../middlewares/checkJWT');
+const upload = require('../core/upload');
+const updateUserValidation = require('../validation/updateUser.validate');
 
 const router = Router();
 
@@ -39,4 +39,4 @@ router.patch(
   controller.unfollow
 );
 
-export default router;
+module.exports = router;

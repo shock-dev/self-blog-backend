@@ -1,9 +1,9 @@
-import { body } from 'express-validator';
+const { body } = require('express-validator');
 
 const title = { min: 3, max: 70 };
 const description = { min: 10, max: 5000 };
 
-export default [
+module.exports = [
   body('title', 'Введите название')
     .isString()
     .withMessage('Название должно быть строкой')

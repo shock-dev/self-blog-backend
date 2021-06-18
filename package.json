@@ -29,6 +29,8 @@
   "devDependencies": {
     "consola": "^2.15.3",
     "editorconfig-checker": "^4.0.2",
+    "eslint": "^7.28.0",
+    "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.7",
     "rimraf": "^3.0.2"
   }

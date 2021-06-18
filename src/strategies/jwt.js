@@ -1,10 +1,9 @@
-import { Strategy } from 'passport-jwt';
-import User from '../models/User';
-import { Request } from 'express';
+const { Strategy } = require('passport-jwt');
+const User = require('../models/User');
 
 const secret = process.env.SECRET_KEY || 'test';
 
-const cookieExtractor = (req: Request) => {
+const cookieExtractor = (req) => {
   if (req && req.cookies) {
     return req.cookies['authToken'];
   }
@@ -28,4 +27,4 @@ const jwtStrategy = new Strategy({
   }
 });
 
-export default jwtStrategy;
+module.exports = jwtStrategy;

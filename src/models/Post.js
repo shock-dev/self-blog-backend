@@ -1,5 +1,4 @@
-import { model, Schema } from 'mongoose';
-import { IPost } from '../types/post';
+const { model, Schema } = require('mongoose');
 
 const postSchema = new Schema({
   title: {
@@ -34,4 +33,4 @@ const postSchema = new Schema({
   timestamps: true
 });
 
-export default model<IPost>('Post', postSchema);
+module.exports = model('Post', postSchema);

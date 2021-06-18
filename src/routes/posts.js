@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import PostController from '../controllers/posts.controller';
-import CommentsController from '../controllers/comments.controller';
-import validatePost from '../validation/post.validate';
-import upload from '../core/upload';
-import checkJWT from '../middlewares/checkJWT';
+const { Router } = require('express');
+const PostController = require('../controllers/posts.controller');
+const CommentsController = require('../controllers/comments.controller');
+const validatePost = require('../validation/post.validate');
+const upload = require('../core/upload');
+const checkJWT = require('../middlewares/checkJWT');
 
 const router = Router();
 
@@ -33,4 +33,4 @@ router.post(
   CommentsController.create
 );
 
-export default router;
+module.exports = router;

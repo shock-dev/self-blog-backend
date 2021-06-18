@@ -1,5 +1,4 @@
-import { model, Schema } from 'mongoose';
-import { IComment } from '../types/comment';
+const { model, Schema } = require('mongoose');
 
 const commentSchema = new Schema({
   text: {
@@ -15,4 +14,4 @@ const commentSchema = new Schema({
   timestamps: true
 });
 
-export default model<IComment>('Comment', commentSchema);
+module.exports = model('Comment', commentSchema);

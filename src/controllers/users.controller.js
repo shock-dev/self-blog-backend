@@ -1,13 +1,10 @@
-import { Request, Response } from 'express';
-import { ResBody } from '../types/response';
-import User from '../models/User';
-import { Express } from '../global';
-import cloudinary from '../core/cloudinary';
-import { validationResult } from 'express-validator';
-import { Types } from 'mongoose';
+const { Types } = require('mongoose');
+const { validationResult } = require('express-validator');
+const User = require('../models/User');
+const cloudinary = require('../core/cloudinary');
 
 class UsersController {
-  async all(req: Request, res: Response<ResBody>) {
+  async all(req, res) {
     try {
       const users = await User.find();
       res.json({
@@ -22,7 +19,7 @@ class UsersController {
     }
   }
 
-  async one(req: Request<any>, res: Response<ResBody>) {
+  async one(req, res) {
     try {
       const { id } = req.params;
       const user = await User.findById(id);
@@ -38,9 +35,9 @@ class UsersController {
     }
   }
 
-  async uploadAvatar(req: Request, res: Response<ResBody>) {
+  async uploadAvatar(req, res) {
     try {
-      const user = await User.findById((req.user as Express.User)._id);
+      const user = await User.findById(req.user._id);
 
       if (!user) {
         return res.status(404).json({
@@ -75,7 +72,7 @@ class UsersController {
     }
   }
 
-  async update(req: Request, res: Response<ResBody>) {
+  async update(req, res) {
     try {
       const errors = validationResult(req);
 
@@ -94,7 +91,7 @@ class UsersController {
         location
       } = req.body;
 
-      const user = await User.findById((req.user as Express.User)._id);
+      const user = await User.findById(req.user._id);
 
       if (user.email !== email) {
         const suitableUser = await User.findOne({ email });
@@ -118,7 +115,7 @@ class UsersController {
         }
       }
 
-      const updatedUser = await User.findByIdAndUpdate((req.user as Express.User)._id, {
+      const updatedUser = await User.findByIdAndUpdate(req.user._id, {
         $set: { email, username, fullname, location, bio }
       }, { new: true });
 
@@ -134,9 +131,9 @@ class UsersController {
     }
   }
 
-  async follow(req: Request, res: Response<ResBody>) {
+  async follow(req, res) {
     try {
-      const me = req.user as Express.User;
+      const me = req.user;
       const id = new Types.ObjectId(req.params.id);
 
       if (!Types.ObjectId.isValid(id)) {
@@ -191,9 +188,9 @@ class UsersController {
     }
   }
 
-  async unfollow(req: Request, res: Response<ResBody>) {
+  async unfollow(req, res) {
     try {
-      const me = req.user as Express.User;
+      const me = req.user;
       const id = new Types.ObjectId(req.params.id);
 
       if (!Types.ObjectId.isValid(id)) {
@@ -250,7 +247,7 @@ class UsersController {
     }
   }
 
-  async followersById(req: Request, res: Response<ResBody>) {
+  async followersById(req, res) {
     try {
       const id = new Types.ObjectId(req.params.id);
 
@@ -275,7 +272,7 @@ class UsersController {
     }
   }
 
-  async followingById(req: Request, res: Response<ResBody>) {
+  async followingById(req, res) {
     try {
       const id = new Types.ObjectId(req.params.id);
 
@@ -301,4 +298,4 @@ class UsersController {
   }
 }
 
-export default new UsersController();
+module.exports = new UsersController();

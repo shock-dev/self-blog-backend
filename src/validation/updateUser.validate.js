@@ -1,9 +1,9 @@
-import { body } from 'express-validator';
+const { body } = require('express-validator');
 
 const email = { min: 6, max: 70 };
 const username = { min: 2, max: 50 };
 
-export default [
+module.exports = [
   body('email', 'Введите email')
     .isString()
     .withMessage('Email должен быть строкой')

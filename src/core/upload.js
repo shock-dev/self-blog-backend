@@ -1,11 +1,10 @@
-import multer from 'multer';
-import path from 'path';
-import { Request } from 'express';
+const multer = require('multer');
+const path = require('path');
 
-export default multer({
+module.exports = multer({
   storage: multer.diskStorage({}),
 
-  fileFilter(req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) {
+  fileFilter(req, file, cb) {
     const ext = path.extname(file.originalname);
 
     if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {

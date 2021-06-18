@@ -1,13 +1,10 @@
-import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
-import { validationResult } from 'express-validator';
-import { ResBody } from '../types/response';
-import { IUser } from '../types/user';
-import User from '../models/User';
-import generateJWT from '../utils/generateJWT';
+const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
+const User = require('../models/User');
+const generateJWT = require('../utils/generateJWT');
 
 class AuthController {
-  async register(req: Request<{}, {}, IUser>, res: Response<ResBody>) {
+  async register(req, res) {
     try {
       const errors = validationResult(req);
 
@@ -39,7 +36,7 @@ class AuthController {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
 
-      const user: IUser = await User.create({
+      const user = await User.create({
         ...req.body,
         password: hash
       });
@@ -64,10 +61,10 @@ class AuthController {
     }
   }
 
-  async login(req: Request, res: Response<ResBody>) {
+  async login(req, res) {
     try {
       const { email, password } = req.body;
-      const user: IUser | null = await User.findOne({ email }).select('+password');
+      const user = await User.findOne({ email }).select('+password');
 
       if (!user) {
         return res.status(400).json({
@@ -105,7 +102,7 @@ class AuthController {
     }
   }
 
-  logout(req: Request, res: Response<ResBody>) {
+  logout(req, res) {
     if (!req.cookies['authToken']) {
       return res.status(400).json({
         status: 'error',
@@ -121,8 +118,8 @@ class AuthController {
     });
   }
 
-  getMe(req: Request, res: Response<ResBody>) {
-    const user: any = req.user;
+  getMe(req, res) {
+    const user = req.user;
 
     res.json({
       status: 'ok',
@@ -131,4 +128,4 @@ class AuthController {
   }
 }
 
-export default new AuthController();
+module.exports = new AuthController();

@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-import consola from 'consola';
+const mongoose = require('mongoose');
+const consola = require('consola');
 
-const connect = async (): Promise<void> => {
+const connect = async () => {
   try {
     await mongoose.connect(
       process.env.MONGO_URL || 'mongodb://localhost:27017/self-blog',
@@ -18,4 +18,4 @@ const connect = async (): Promise<void> => {
   }
 };
 
-export default connect;
+module.exports = connect;

@@ -4,7 +4,7 @@ const cors = require('cors');
 const passport = require('passport');
 const consola = require('consola');
 const cookieParser = require('cookie-parser');
-const connect = require('./core/db');
+const connect = require('./src/core/db');
 
 dotenv.config();
 
@@ -20,9 +20,9 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 
-app.use('/posts', require('./routes/posts'));
-app.use('/auth', require('./routes/auth'));
-app.use('/users', require('./routes/users'));
+app.use('/posts', require('./src/routes/posts'));
+app.use('/auth', require('./src/routes/auth'));
+app.use('/users', require('./src/routes/users'));
 
 connect()
   .then(() => {

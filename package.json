@@ -1,13 +1,13 @@
 {
   "name": "self-blog-backend",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "index.js",
   "repository": "https://github.com/shock-dev/self-blog-backend.git",
   "author": "Andrey <shock.work@mail.ru>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "lint:eslint": "yarn eslint --ext .js src/",
     "editorconfig": "editorconfig-checker"
   },

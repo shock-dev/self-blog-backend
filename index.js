@@ -16,13 +16,13 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(cors({
   credentials: true,
-  origin: 'http://localhost:3000',
+  origin: 'https://self-blog.vercel.app',
   optionsSuccessStatus: 200
 }));
 
-app.use('/posts', require('./src/routes/posts'));
-app.use('/auth', require('./src/routes/auth'));
-app.use('/users', require('./src/routes/users'));
+app.use('/api/posts', require('./src/routes/posts'));
+app.use('/api/auth', require('./src/routes/auth'));
+app.use('/api/users', require('./src/routes/users'));
 
 connect()
   .then(() => {

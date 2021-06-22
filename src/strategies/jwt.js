@@ -1,7 +1,7 @@
 const { Strategy } = require('passport-jwt');
 const User = require('../models/User');
 
-const secret = process.env.SECRET_KEY || 'test';
+const secret = process.env.SECRET_KEY;
 
 const cookieExtractor = (req) => {
   if (req && req.cookies) {

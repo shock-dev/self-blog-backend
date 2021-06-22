@@ -4,7 +4,7 @@ const consola = require('consola');
 const connect = async () => {
   try {
     await mongoose.connect(
-      process.env.MONGO_URL || 'mongodb://localhost:27017/self-blog',
+      process.env.MONGO_URL,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

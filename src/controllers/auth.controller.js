@@ -6,7 +6,7 @@ const generateJWT = require('../utils/generateJWT');
 const cookieOptions = {
   maxAge: 30 * 24 * 60 * 60 * 1000,
   sameSite: 'none',
-  secure: false
+  secure: true
 };
 
 class AuthController {

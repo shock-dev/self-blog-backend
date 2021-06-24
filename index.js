@@ -24,9 +24,9 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 
-app.use('/api/posts', require('./src/routes/posts'));
-app.use('/api/auth', require('./src/routes/auth'));
-app.use('/api/users', require('./src/routes/users'));
+app.use('/posts', require('./src/routes/posts'));
+app.use('/auth', require('./src/routes/auth'));
+app.use('/users', require('./src/routes/users'));
 
 const start = async () => {
   try {

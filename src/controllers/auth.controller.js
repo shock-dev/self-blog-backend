@@ -90,22 +90,6 @@ class AuthController {
     }
   }
 
-  logout(req, res) {
-    if (!req.cookies['authToken']) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'You\'re already out'
-      });
-    }
-
-    res.clearCookie('authToken');
-
-    return res.json({
-      status: 'ok',
-      message: 'You have successfully logged out'
-    });
-  }
-
   getMe(req, res) {
     const user = req.user;
 

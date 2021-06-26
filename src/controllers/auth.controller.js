@@ -3,13 +3,6 @@ const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const generateJWT = require('../utils/generateJWT');
 
-const cookieOptions = {
-  maxAge: 30 * 24 * 60 * 60 * 1000,
-  sameSite: 'none',
-  secure: true,
-  domain: 'self-blog.vercel.app'
-};
-
 class AuthController {
   async register(req, res) {
     try {
@@ -50,11 +43,9 @@ class AuthController {
 
       const token = generateJWT(user);
 
-      res.cookie('authToken', token, cookieOptions);
-
       res.json({
         status: 'ok',
-        data: user
+        data: token
       });
     } catch (e) {
       res.status(500).json({
@@ -87,11 +78,9 @@ class AuthController {
 
       const token = generateJWT(user);
 
-      res.cookie('authToken', token, cookieOptions);
-
       res.json({
         status: 'ok',
-        data: user
+        data: token
       });
     } catch (e) {
       res.status(500).json({

@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(cors({
   credentials: true,
-  origin: 'https://self-blog.vercel.app/',
+  origin: 'https://self-blog.vercel.app',
   optionsSuccessStatus: 200
 }));
 

@@ -20,8 +20,9 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(cors({
   credentials: true,
+  optionsSuccessStatus: 200,
   origin: 'https://self-blog.vercel.app',
-  optionsSuccessStatus: 200
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use('/posts', require('./src/routes/posts'));

@@ -1,18 +1,9 @@
-const { Strategy } = require('passport-jwt');
+const { Strategy, ExtractJwt } = require('passport-jwt');
 const User = require('../models/User');
 
-const secret = process.env.SECRET_KEY;
-
-const cookieExtractor = (req) => {
-  if (req && req.cookies) {
-    return req.cookies['authToken'];
-  }
-  return null;
-};
-
 const jwtStrategy = new Strategy({
-  jwtFromRequest: cookieExtractor,
-  secretOrKey: secret
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.SECRET_KEY
 }, async ({ _id }, done) => {
   try {
     const user = await User.findById(_id);

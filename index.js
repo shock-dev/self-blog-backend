@@ -20,8 +20,8 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(cors({
   credentials: true,
-  optionsSuccessStatus: 200,
   origin: process.env.ORIGIN,
+  optionsSuccessStatus: 200,
   methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie']
 }));

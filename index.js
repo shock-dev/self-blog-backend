@@ -22,6 +22,7 @@ app.use(cors({
   credentials: true,
   optionsSuccessStatus: 200,
   origin: process.env.ORIGIN,
+  methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie']
 }));
 

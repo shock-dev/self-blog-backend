@@ -34,11 +34,9 @@ module.exports = [
     .withMessage(`Допустимое кол-во символов username от ${username. min} до ${username. max} символов`),
 
   body('birthday', 'Отсутствует дата рождения')
-    .isDate({
-      format: 'DD/MM/YYYY',
-      delimiters: ['/', '.']
-    })
-    .withMessage('Некорректный формат даты'),
+    .isISO8601()
+    .withMessage('Некорректный формат даты')
+    .toDate(),
 
   body('password', 'Введите пароль')
     .isString()

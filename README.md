@@ -13,3 +13,7 @@
 - [Express-validator](https://express-validator.github.io/docs/)
 - [Passport.js](http://www.passportjs.org/)
 - [Cloudinary](https://cloudinary.com/) for storing images on a remote server
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

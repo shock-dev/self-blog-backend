@@ -8,6 +8,33 @@
 
 🌐 Backend part of my own blog. Based on Express.js framework. 🏅 It should be evaluated as a full stack application for a portfolio. 🏹 [Frontend part](https://github.com/shock-dev/self-blog)
 
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/shock-dev/self-blog-backend.git
+```
+
+Go to the project directory
+
+```bash
+  cd self-blog-backend
+```
+
+Install dependencies
+
+```bash
+  yarn
+```
+
+Start the server
+
+```bash
+  yarn dev
+```
+
 ## The technologies I used (main):
 
 - [Express.js](https://expressjs.com/)

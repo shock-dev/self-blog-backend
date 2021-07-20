@@ -22,12 +22,12 @@ app.use(cors({
   credentials: true,
   origin: process.env.ORIGIN,
   optionsSuccessStatus: 200,
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie']
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.use('/posts', require('./src/routes/posts'));
-app.use('/auth', require('./src/routes/auth'));
-app.use('/users', require('./src/routes/users'));
+app.use('/posts', require('./routes/posts'));
+app.use('/auth', require('./routes/auth'));
+app.use('/users', require('./routes/users'));
 
 const start = async () => {
   try {

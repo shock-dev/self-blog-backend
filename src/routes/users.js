@@ -8,6 +8,8 @@ const router = Router();
 
 router.get('/', controller.all);
 
+router.get('/latest', controller.getLatestUsers);
+
 router.get('/:id', controller.one);
 
 router.get('/:id/followers', controller.followersById);

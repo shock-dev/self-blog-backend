@@ -296,6 +296,30 @@ class UsersController {
       });
     }
   }
+
+  async getLatestUsers(req, res) {
+    try {
+      const limit = +req.query.limit;
+
+      if (isNaN(limit)) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid query param'
+        });
+      }
+
+      const latest = await User.find().sort({ createdAt: -1 }).limit(limit);
+      res.json({
+        status: 'ok',
+        data: latest
+      });
+    } catch (e) {
+      res.status(500).json({
+        status: 'error',
+        data: e
+      });
+    }
+  }
 }
 
 module.exports = new UsersController();

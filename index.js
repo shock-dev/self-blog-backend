@@ -28,6 +28,7 @@ app.use(cors({
 app.use('/posts', require('./routes/posts'));
 app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
+app.use('/search', require('./routes/search'));
 
 const start = async () => {
   try {

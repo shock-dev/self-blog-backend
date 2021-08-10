@@ -22,14 +22,14 @@ class AuthController {
       if (suitableUser?.email === email) {
         return res.status(500).json({
           status: 'error',
-          message: 'Пользователь с таким email уже существует'
+          data: 'Пользователь с таким email уже существует'
         });
       }
 
       if (suitableUser?.username === username) {
         return res.status(500).json({
           status: 'error',
-          message: 'Придумайте другой username'
+          data: 'Придумайте другой username'
         });
       }
 
@@ -50,7 +50,7 @@ class AuthController {
     } catch (e) {
       res.status(500).json({
         status: 'error',
-        message: e.message
+        data: e.message
       });
     }
   }
